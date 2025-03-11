@@ -5,5 +5,89 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="PreferenceSurvey.MainWindow"
         Title="PreferenceSurvey">
-    Welcome to Avalonia!
+    <StackPanel HorizontalAlignment="Center">
+        <TextBox Width="200" Height="30" Watermark="Name" 
+                 Margin="10"
+                 x:Name="NameTextBox"
+        />
+        <TextBlock Text=""/>
+        <ComboBox Width="200" Margin="10" x:Name="CategoryComboBox">
+            <ComboBoxItem Content="Technology"/>
+            <ComboBoxItem Content="Sport"/>
+            <ComboBoxItem Content="Culture"/>
+            <ComboBoxItem Content="Art"/>
+            <ComboBoxItem Content="Politics"/>
+        </ComboBox>
+        <TextBlock Text=""/>
+        <Button Content="Submit" 
+                Click="CheckInputs" 
+                HorizontalAlignment="Center"
+                Margin="0 0 0 30"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Row="0" 
+                       Grid.Column="0" 
+                       Text="Do you like coding?"
+                       VerticalAlignment="Center"
+                       Margin="0 0 10 0"/>
+            <CheckBox Grid.Row="0" 
+                      Grid.Column="1" 
+                      Content="Tak" />
+            
+            <TextBlock Grid.Row="1" 
+                       Grid.Column="0" 
+                       Text="Do you like volleyball?"
+                       VerticalAlignment="Center"
+                       Margin="0 0 10 0"/>
+            <CheckBox Grid.Row="1" 
+                      Grid.Column="1" 
+                      Content="Tak" />
+            
+            <TextBlock Grid.Row="2" 
+                       Grid.Column="0" 
+                       Text="Do you like cooking?"
+                       VerticalAlignment="Center"
+                       Margin="0 0 10 0" />
+            <CheckBox Grid.Row="2" 
+                      Grid.Column="1" 
+                      Content="Tak" />
+            
+            <TextBlock Grid.Row="3" 
+                       Grid.Column="0" 
+                       Text="Do you like painting?"
+                       VerticalAlignment="Center"
+                       Margin="0 0 10 0"/>
+            <CheckBox Grid.Row="3" 
+                      Grid.Column="1" 
+                      Content="Tak" />
+            
+            <TextBlock Grid.Row="4" 
+                       Grid.Column="0" 
+                       Text="Do you like debating?"
+                       VerticalAlignment="Center"
+                       Margin="0 0 10 0"/>
+            <CheckBox Grid.Row="4" 
+                      Grid.Column="1" 
+                      Content="Tak" />
+        </Grid>
+        <Button Content="Summarize" 
+                HorizontalAlignment="Center"
+                Click="SummarizeAll"
+                Margin="0 10 0 0"/>
+        <TextBlock Text="Waiting for data..."
+                   x:Name="SummaryTextBlock"
+                   Margin="0 20 0 0"/>
+    </StackPanel>
 </Window>
