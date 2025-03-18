@@ -9,21 +9,26 @@
         <TextBox Width="200" Height="30" Watermark="Name" 
                  Margin="10"
                  x:Name="NameTextBox"
+                 Text=""
         />
-        <TextBlock Text=""/>
-        <ComboBox Width="200" Margin="10" x:Name="CategoryComboBox">
+        <TextBlock Text=""
+                   x:Name="NameErrorTextBlock"
+                   Foreground="Red"/>
+        <ComboBox Width="200" Margin="10" x:Name="CategoryComboBox" PlaceholderText="Choose interest">
             <ComboBoxItem Content="Technology"/>
             <ComboBoxItem Content="Sport"/>
             <ComboBoxItem Content="Culture"/>
             <ComboBoxItem Content="Art"/>
             <ComboBoxItem Content="Politics"/>
         </ComboBox>
-        <TextBlock Text=""/>
+        <TextBlock Text=""
+                   x:Name="CategoryErrorTextBlock"
+                   Foreground="Red"/>
         <Button Content="Submit" 
                 Click="CheckInputs" 
                 HorizontalAlignment="Center"
-                Margin="0 0 0 30"/>
-        <Grid>
+                Margin="0 10 0 30"/>
+        <Grid x:Name="CheckboxesGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -41,7 +46,8 @@
                        Grid.Column="0" 
                        Text="Do you like coding?"
                        VerticalAlignment="Center"
-                       Margin="0 0 10 0"/>
+                       Margin="0 0 10 0"
+                       x:Name="First"/>
             <CheckBox Grid.Row="0" 
                       Grid.Column="1" 
                       Content="Tak" />
