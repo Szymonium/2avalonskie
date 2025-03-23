@@ -4,13 +4,11 @@
         Title="DailyPlanner" Width="400" Height="500">
     <StackPanel Margin="10">
         <TextBox x:Name="TaskName" Watermark="Wpisz zadanie..." />
-        
         <ComboBox x:Name="CategorySelection">
             <ComboBoxItem Content="Praca" />
             <ComboBoxItem Content="Relaks" />
             <ComboBoxItem Content="Zakupy" />
         </ComboBox>
-        
         <Button Content="Dodaj zadanie" Click="AddTask" />
         
         <Grid x:Name="TaskGrid" Margin="0,20,0,0">
