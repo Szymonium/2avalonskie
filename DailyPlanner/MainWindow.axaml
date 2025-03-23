@@ -1,9 +1,35 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="DailyPlanner.MainWindow"
-        Title="DailyPlanner">
-    Welcome to Avalonia!
+        Title="DailyPlanner" Width="400" Height="500">
+    <StackPanel Margin="10">
+        <TextBox x:Name="TaskName" Watermark="Wpisz zadanie..." />
+        
+        <ComboBox x:Name="CategorySelection">
+            <ComboBoxItem Content="Praca" />
+            <ComboBoxItem Content="Relaks" />
+            <ComboBoxItem Content="Zakupy" />
+        </ComboBox>
+        
+        <Button Content="Dodaj zadanie" Click="AddTask" />
+        
+        <Grid x:Name="TaskGrid" Margin="0,20,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Zadanie" Margin="5"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="Kategoria" Margin="5"/>
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="Ukonczone" Margin="5"/>
+            <TextBlock Grid.Row="0" Grid.Column="3" Text="Usunac?" Margin="5"/>
+        </Grid>
+
+        <TextBlock x:Name="SummaryText" Margin="10"/>
+    </StackPanel>
 </Window>
