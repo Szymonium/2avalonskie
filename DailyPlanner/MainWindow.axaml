@@ -3,13 +3,13 @@
         x:Class="DailyPlanner.MainWindow"
         Title="DailyPlanner" Width="400" Height="500">
     <StackPanel Margin="10">
-        <TextBox x:Name="TaskName" Watermark="Wpisz zadanie..." />
+        <TextBox x:Name="TaskName" Watermark="Enter task content..." />
         <ComboBox x:Name="CategorySelection">
-            <ComboBoxItem Content="Praca" />
-            <ComboBoxItem Content="Relaks" />
-            <ComboBoxItem Content="Zakupy" />
+            <ComboBoxItem Content="Work" />
+            <ComboBoxItem Content="Relax" />
+            <ComboBoxItem Content="Shopping" />
         </ComboBox>
-        <Button Content="Dodaj zadanie" Click="AddTask" />
+        <Button Content="Add" Click="AddTask" />
         
         <Grid x:Name="TaskGrid" Margin="0,20,0,0">
             <Grid.ColumnDefinitions>
@@ -22,10 +22,6 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="Zadanie" Margin="5"/>
-            <TextBlock Grid.Row="0" Grid.Column="1" Text="Kategoria" Margin="5"/>
-            <TextBlock Grid.Row="0" Grid.Column="2" Text="Ukonczone" Margin="5"/>
-            <TextBlock Grid.Row="0" Grid.Column="3" Text="Usunac?" Margin="5"/>
         </Grid>
 
         <TextBlock x:Name="SummaryText" Margin="10"/>

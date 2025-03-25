@@ -1,6 +1,10 @@
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using Avalonia.Controls;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace DailyPlanner
 {
@@ -16,8 +20,8 @@ namespace DailyPlanner
         }   
         public class TaskItem
         {
-             public string Name { get; set; }
-             public string Category { get; set; }
+             public required string Name { get; set; }
+             public required string Category { get; set; }
              public bool IsCompleted { get; set; }
         }
         private void AddTask(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
@@ -51,7 +55,7 @@ namespace DailyPlanner
         {
             var taskHeader = new TextBlock
             {
-                Text = "Zadanie",
+                Text = "Task",
                 Margin = new Avalonia.Thickness(5)
             };
             Grid.SetRow(taskHeader, 0);
@@ -60,7 +64,7 @@ namespace DailyPlanner
             
             var categoryHeader = new TextBlock
             {
-                Text = "Kategoria",
+                Text = "Category",
                 Margin = new Avalonia.Thickness(5)
             };
             Grid.SetRow(categoryHeader, 0);
@@ -69,7 +73,7 @@ namespace DailyPlanner
             
             var completionHeader = new TextBlock
             {
-                Text = "Ukonczone",
+                Text = "Done",
                 Margin = new Avalonia.Thickness(5)
             };
             Grid.SetRow(completionHeader, 0);
@@ -78,7 +82,7 @@ namespace DailyPlanner
             
             var actionHeader = new TextBlock
             {
-                Text = "Usunac?",
+                Text = "Deletion",
                 Margin = new Avalonia.Thickness(5)
             };
             Grid.SetRow(actionHeader, 0);
@@ -96,30 +100,37 @@ namespace DailyPlanner
             Grid.SetRow(taskNameTextBlock, rowIndex);
             Grid.SetColumn(taskNameTextBlock, 0);
             TaskGrid.Children.Add(taskNameTextBlock);
-
-            var categoryTextBlock = new TextBlock
+            
+            var categoryComboBox = new ComboBox
             {
-                Text = task.Category,
                 Margin = new Avalonia.Thickness(5)
             };
-            Grid.SetRow(categoryTextBlock, rowIndex);
-            Grid.SetColumn(categoryTextBlock, 1);
-            TaskGrid.Children.Add(categoryTextBlock);
+            for (int i = 0; i < CategorySelection.Items.Count; i++)
+            {
+                categoryComboBox.Items.Add((CategorySelection.Items[i] as ComboBoxItem)?.Content?.ToString());
+            }
+
+            categoryComboBox.SelectedItem = task.Category;
+            categoryComboBox.SelectionChanged +=
+                (box, _) => task.Category = (box as ComboBox).SelectionBoxItem.ToString();
+            
+            Grid.SetRow(categoryComboBox, rowIndex);
+            Grid.SetColumn(categoryComboBox, 1);
+            TaskGrid.Children.Add(categoryComboBox);
             
             var checkBox = new CheckBox
             {
                 IsChecked = task.IsCompleted,
                 Margin = new Avalonia.Thickness(5)
             };
-            checkBox.Checked += (_, _) => UpdateCompletionStatus(task);
-            checkBox.Unchecked += (_, _) => UpdateCompletionStatus(task);
+            checkBox.IsCheckedChanged += (_, _) => UpdateCompletionStatus(task);
             Grid.SetRow(checkBox, rowIndex);
             Grid.SetColumn(checkBox, 2);
             TaskGrid.Children.Add(checkBox);
 
             var deleteButton = new Button
             {
-                Content = "Usun",
+                Content = "Delete",
                 Margin = new Avalonia.Thickness(5),
                 Tag = task
             };
@@ -146,7 +157,7 @@ namespace DailyPlanner
 
         private void UpdateSummary()
         {
-            SummaryText.Text = $"Zadania: {Tasks.Count}, Ukonczone: {Tasks.Count(t => t.IsCompleted)}";
+            SummaryText.Text = $"Tasks: {Tasks.Count}, Finished: {Tasks.Count(t => t.IsCompleted)}";
         }
     }
 
