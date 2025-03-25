@@ -12,8 +12,13 @@ namespace DailyPlanner
         {
             InitializeComponent();
             DataContext = this;
-            TaskGrid.Children.Clear();
-            Tasks.CollectionChanged += (s, e) => UpdateTaskGrid();
+            Tasks.CollectionChanged += (_, _) => UpdateTaskGrid();
+        }   
+        public class TaskItem
+        {
+             public string Name { get; set; }
+             public string Category { get; set; }
+             public bool IsCompleted { get; set; }
         }
         private void AddTask(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
@@ -30,9 +35,7 @@ namespace DailyPlanner
         {
             TaskGrid.RowDefinitions.Clear();
             TaskGrid.Children.Clear();
-
             TaskGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Auto) });
-            
             AddHeaderToGrid();
 
             int rowIndex = 1;
@@ -108,8 +111,8 @@ namespace DailyPlanner
                 IsChecked = task.IsCompleted,
                 Margin = new Avalonia.Thickness(5)
             };
-            checkBox.Checked += (sender, e) => UpdateCompletionStatus(task);
-            checkBox.Unchecked += (sender, e) => UpdateCompletionStatus(task);
+            checkBox.Checked += (_, _) => UpdateCompletionStatus(task);
+            checkBox.Unchecked += (_, _) => UpdateCompletionStatus(task);
             Grid.SetRow(checkBox, rowIndex);
             Grid.SetColumn(checkBox, 2);
             TaskGrid.Children.Add(checkBox);
@@ -147,10 +150,5 @@ namespace DailyPlanner
         }
     }
 
-    public class TaskItem
-    {
-        public string Name { get; set; }
-        public string Category { get; set; }
-        public bool IsCompleted { get; set; }
-    }
+
 }
